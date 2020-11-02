@@ -13,9 +13,17 @@ namespace Project4
 {
     public partial class Form1 : Form
     {
+        NpgsqlConnection dbConnection;
         public Form1()
         {
             InitializeComponent();
+
+            SetDBConnection("localhost", "postgres", "peteypete117", "OOP");
+
+            CheckPostgresVersion();
+
+            GetMembersFromDB();
+            GetMoviesFromDB();
         }
 
         /// <summary>
@@ -54,28 +62,67 @@ namespace Project4
         /// </summary>
         /// <param name="MembersId">The employee ID</param>
         /// <returns></returns>
-        private Member GetMembersFromDB(int MembersId)
+        private List<Member> GetMembersFromDB()
         {
-            Member member = new Member();
+
+            Member currentMember;
+            List<Member> foundMembers = new List<Member>();
 
             dbConnection.Open();
 
-            string sqlQuery = "SELECT * FROM Members WHERE Member.ID = " + MembersId + ";";
+            string sqlQuery = "SELECT * FROM Member;";
 
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
 
             NpgsqlDataReader dataReader = dbCommand.ExecuteReader();
 
-            dataReader.Read();
-            
-            member.Name = dataReader.GetString(0);
-            member.Type = dataReader.GetInt32(1);
-            member.ID = dataReader.GetInt32(2);
-            member.DOB = dataReader.GetDateTime(3);
+            while (dataReader.Read())
+            {
+                currentMember = new Member();
+
+                currentMember.ID = dataReader.GetInt32(0);
+                currentMember.Name = dataReader.GetString(1);
+                currentMember.DOB = dataReader.GetDateTime(2);
+                currentMember.Type = dataReader.GetInt32(3);
+
+                foundMembers.Add(currentMember);
+            }
+            dbConnection.Close();
+
+            return foundMembers;
+        }
+
+        private List<Movie> GetMoviesFromDB()
+        {
+            Movie currentMovie;
+            List<Movie> foundMovies = new List<Movie>();
+
+
+            dbConnection.Open();
+
+            string sqlQuery = "SELECT * FROM Movie;";
+
+            NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
+
+            NpgsqlDataReader dataReader = dbCommand.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                currentMovie = new Movie();
+
+                currentMovie.ID = dataReader.GetInt32(0);
+                currentMovie.Title = dataReader.GetString(1);
+                currentMovie.Year = dataReader.GetInt32(2);
+                currentMovie.Length = dataReader.GetInterval(3).ToString();
+                currentMovie.Rating = dataReader.GetDouble(4);
+                currentMovie.Image = dataReader.GetString(5);
+
+                foundMovies.Add(currentMovie);
+            }
 
             dbConnection.Close();
 
-            return member;
+            return foundMovies;
         }
     }
 }
