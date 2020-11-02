@@ -35,8 +35,8 @@ namespace Project4
             moviesListView.Columns.Add("Length");
 
         }
-         
-         List<Genre> foundGenres = new List<Genre>();
+
+        List<Genre> foundGenres = new List<Genre>();
 
 
         /// <summary>
@@ -48,9 +48,9 @@ namespace Project4
         /// <param name="dbName">The db to connect to</param>
         /// <returns></returns>
         private void SetDBConnection(string serverAddress, string username, string passwd, string dbName)
-        { 
+        {
             string conectionString = "Host=" + serverAddress + "; Username=" + username + "; Password=" + passwd + "; Database=" + dbName + ";";
-        
+
             dbConnection = new NpgsqlConnection(conectionString);
         }
 
@@ -71,36 +71,44 @@ namespace Project4
         }
 
         /// <summary>
-        /// This methods the info of a particular empoyee and returns a new Employee object containing that info
+        /// This methods the info of the movie members and returns the new member list containing that info.
         /// </summary>
         /// <param name="MembersId">The employee ID</param>
         /// <returns></returns>
         private List<Member> GetMembersFromDB()
         {
-
             Member currentMember;
             List<Member> foundMembers = new List<Member>();
 
+            // Open the connection to the database.
             dbConnection.Open();
 
+            // This respresents the SQL query to execute in the database.
             string sqlQuery = "SELECT * FROM Member;";
 
+            // This is the actual SQL containing the query to be executed.
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
 
+            // This variable stores the result of the SQL query sent to the database.
             NpgsqlDataReader dataReader = dbCommand.ExecuteReader();
 
+            // Read each line present in the dataReader.
             while (dataReader.Read())
             {
+                // Create new member.
                 currentMember = new Member();
 
+                // Retrieve the member information from the database.
                 currentMember.ID = dataReader.GetInt32(0);
                 currentMember.Name = dataReader.GetString(1);
                 currentMember.DOB = dataReader.GetDateTime(2);
                 currentMember.Type = dataReader.GetInt32(3);
 
+                // Add the member to the member list.
                 foundMembers.Add(currentMember);
-                
+
             }
+            // Close the connection to the database.
             dbConnection.Close();
 
             return foundMembers;
@@ -111,61 +119,76 @@ namespace Project4
             Movie currentMovie;
             List<Movie> foundMovies = new List<Movie>();
 
-
+            // Open the connection to the database.
             dbConnection.Open();
 
+            // This respresents the SQL query to execute in the database.
             string sqlQuery = "SELECT * FROM Movie;";
 
+            // This is the actual SQL containing the query to be executed.
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
 
+            // This variable stores the result of the SQL query sent to the database.
             NpgsqlDataReader dataReader = dbCommand.ExecuteReader();
 
+            // Read each line present in the dataReader.
             while (dataReader.Read())
             {
+                // Create new movie.
                 currentMovie = new Movie();
 
+                // Retrieve the movie information from the database.
                 currentMovie.ID = dataReader.GetInt32(0);
                 currentMovie.Title = dataReader.GetString(1);
                 currentMovie.Year = dataReader.GetInt32(2);
                 currentMovie.Length = dataReader.GetInterval(3).ToString();
                 currentMovie.Rating = dataReader.GetDouble(4);
+                // If there is no image for the movie.
                 if (dataReader.IsDBNull(5))
                 {
                     currentMovie.Image = "";
                 }
                 else
                 {
-                  currentMovie.Image = dataReader.GetString(5);
+                    currentMovie.Image = dataReader.GetString(5);
                 }
 
+                // Add the movie to the movie list.
                 foundMovies.Add(currentMovie);
             }
 
+            // Close the connection to the database.
             dbConnection.Close();
 
-            
             return foundMovies;
         }
 
         private List<Genre> GetGenresFromDB()
         {
-         
             Genre currentGenre;
 
+            // Open the connection to the database.
             dbConnection.Open();
 
+            // This respresents the SQL query to execute in the database.
             string sqlQuery = "SELECT * FROM Genre;";
 
+            // This is the actual SQL containing the query to be executed.
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
 
+            // This variable stores the result of the SQL query sent to the database.
             NpgsqlDataReader dataReader = dbCommand.ExecuteReader();
 
+            // Retrieve the genre information from the database.
             while (dataReader.Read())
             {
+                // Create new genre.
                 currentGenre = new Genre();
 
+                // Retrieve the genre information from the database.
                 currentGenre.Code = dataReader.GetString(0);
                 currentGenre.Name = dataReader.GetString(1);
+                // If there is no description for the genre.
                 if (dataReader.IsDBNull(2))
                 {
                     currentGenre.Description = "";
@@ -174,30 +197,56 @@ namespace Project4
                 {
                     currentGenre.Description = dataReader.GetString(2);
                 }
-                foundGenres.Add(currentGenre); 
+
+                // Add the genre to the genre list.
+                foundGenres.Add(currentGenre);
+
+                // Add the genre to the genre combo box.
                 genreNameComboBox.Items.Add(currentGenre.Name);
             }
 
-         
-            
+            // Close the connection to the database.
             dbConnection.Close();
 
-           
             return foundGenres;
+        }
+
+        private void Clear()
+        {
+            moviesListView.Clear();
+
+            yearTextBox.Clear();
+            lengthTextBox.Clear();
+            ratingTextBox.Clear();
+            imageTextBox.Clear();
+            moviesPictureBox.ImageLocation = "";
+
         }
 
         private void genreNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-                foreach(Genre currentGenre in foundGenres)
+
+            // Clear the listview and textboxes.
+            Clear();
+
+            // Add column titles to the ListView.
+            moviesListView.Columns.Add("Title");
+            moviesListView.Columns.Add("Year");
+            moviesListView.Columns.Add("length");
+
+            foreach (Genre currentGenre in foundGenres)
+            {
+                if (genreNameComboBox.GetItemText(genreNameComboBox.SelectedItem) == currentGenre.Name)
                 {
-                  if(genreNameComboBox.GetItemText(genreNameComboBox.SelectedItem) == currentGenre.Name)
-                  {
-                       genreCodeTextBox.Text = currentGenre.Code;
-                       genreDescriptionTextBox.Text = currentGenre.Description;
-                  }
+
+                    genreCodeTextBox.Text = currentGenre.Code;
+                    genreDescriptionTextBox.Text = currentGenre.Description;
                 }
-        }
+            }
+        
     }
+    }
+    
 }
 //hello
 
