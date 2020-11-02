@@ -13,13 +13,9 @@ namespace Project4
 {
     public partial class Form1 : Form
     {
-        NpgsqlConnection dbConnection;
-
         public Form1()
         {
             InitializeComponent();
-            SetDBConnection("localhost", "postgres", "peteypete117", "OOP");
-            CheckPostgresVersion();
         }
 
         /// <summary>
