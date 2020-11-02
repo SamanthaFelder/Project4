@@ -24,7 +24,20 @@ namespace Project4
 
             GetMembersFromDB();
             GetMoviesFromDB();
+            GetGenresFromDB();
+
+
+            moviesListView.View = View.Details;
+            moviesListView.FullRowSelect = true;
+            moviesListView.GridLines = true;
+            moviesListView.Columns.Add("Title");
+            moviesListView.Columns.Add("Year");
+            moviesListView.Columns.Add("Length");
+
         }
+         
+         List<Genre> foundGenres = new List<Genre>();
+
 
         /// <summary>
         /// This method setsup a db connection to a postgreSQL db. The connection is stored in the global variable 'dbConnection'
@@ -86,6 +99,7 @@ namespace Project4
                 currentMember.Type = dataReader.GetInt32(3);
 
                 foundMembers.Add(currentMember);
+                
             }
             dbConnection.Close();
 
@@ -115,14 +129,73 @@ namespace Project4
                 currentMovie.Year = dataReader.GetInt32(2);
                 currentMovie.Length = dataReader.GetInterval(3).ToString();
                 currentMovie.Rating = dataReader.GetDouble(4);
-                currentMovie.Image = dataReader.GetString(5);
+                if (dataReader.IsDBNull(5))
+                {
+                    currentMovie.Image = "";
+                }
+                else
+                {
+                  currentMovie.Image = dataReader.GetString(5);
+                }
 
                 foundMovies.Add(currentMovie);
             }
 
             dbConnection.Close();
 
+            
             return foundMovies;
+        }
+
+        private List<Genre> GetGenresFromDB()
+        {
+         
+            Genre currentGenre;
+
+            dbConnection.Open();
+
+            string sqlQuery = "SELECT * FROM Genre;";
+
+            NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
+
+            NpgsqlDataReader dataReader = dbCommand.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                currentGenre = new Genre();
+
+                currentGenre.Code = dataReader.GetString(0);
+                currentGenre.Name = dataReader.GetString(1);
+                if (dataReader.IsDBNull(2))
+                {
+                    currentGenre.Description = "";
+                }
+                else
+                {
+                    currentGenre.Description = dataReader.GetString(2);
+                }
+                foundGenres.Add(currentGenre); 
+                genreNameComboBox.Items.Add(currentGenre.Name);
+            }
+
+         
+            
+            dbConnection.Close();
+
+           
+            return foundGenres;
+        }
+
+        private void genreNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                foreach(Genre currentGenre in foundGenres)
+                {
+                  if(genreNameComboBox.GetItemText(genreNameComboBox.SelectedItem) == currentGenre.Name)
+                  {
+                       genreCodeTextBox.Text = currentGenre.Code;
+                       genreDescriptionTextBox.Text = currentGenre.Description;
+                  }
+                }
         }
     }
 }
