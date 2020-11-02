@@ -8,6 +8,7 @@ namespace Project4
 {
     class Movie
     {
+        public string genre { get; set; }
         public int ID { get; set; }
         public string Title { get; set; }
         public int Year { get; set; }

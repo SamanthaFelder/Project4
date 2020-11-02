@@ -20,6 +20,7 @@ namespace Project4
             InitializeComponent();
             SetDBConnection("localhost", "postgres", "peteypete117", "OOP");
             CheckPostgresVersion();
+            GetMembersFromDB(2);
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace Project4
 
             dbConnection.Open();
 
-            string sqlQuery = "SELECT * FROM Members WHERE Member.ID = " + MembersId + ";";
+            string sqlQuery = "SELECT * FROM member WHERE Member.ID = " + MembersId + ";";
 
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
 
@@ -76,12 +77,12 @@ namespace Project4
             member.Type = dataReader.GetInt32(1);
             member.ID = dataReader.GetInt32(2);
             member.DOB = dataReader.GetDateTime(3);
-
+            MessageBox.Show(dataReader.GetString(0));
             dbConnection.Close();
 
             return member;
         }
     }
 }
-//hello
+
 
