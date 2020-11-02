@@ -22,6 +22,7 @@ namespace Project4
 
             CheckPostgresVersion();
 
+
             GetMembersFromDB();
             GetMoviesFromDB();
             GetGenresFromDB();
@@ -114,6 +115,7 @@ namespace Project4
 
             dbConnection.Open();
 
+
             string sqlQuery = "SELECT * FROM Movie;";
 
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
@@ -143,7 +145,6 @@ namespace Project4
 
             dbConnection.Close();
 
-            
             return foundMovies;
         }
 
@@ -178,8 +179,6 @@ namespace Project4
                 genreNameComboBox.Items.Add(currentGenre.Name);
             }
 
-         
-            
             dbConnection.Close();
 
            
@@ -199,5 +198,5 @@ namespace Project4
         }
     }
 }
-//hello
+
 
