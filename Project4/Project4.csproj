@@ -84,11 +84,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Genre.cs" />
-    <Compile Include="GenreMovie.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="MemberTypes.cs" />
     <Compile Include="Movie.cs" />
-    <Compile Include="MovieMember.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
