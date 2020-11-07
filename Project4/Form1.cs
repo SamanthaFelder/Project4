@@ -31,9 +31,8 @@ namespace Project4
             GetMembersFromDB();
             GetMoviesFromDB();
             GetGenresFromDB();
-            //GetMemberTypeFromDB();
-            //GetGenreMovieFromDB();
-            //GetMovieMemberFromDB();
+            GetMemberTypeFromDB();
+           
 
             moviesListView.View = View.Details;
             moviesListView.FullRowSelect = true;
@@ -47,9 +46,8 @@ namespace Project4
         List<Genre> foundGenres = new List<Genre>();
         List<Member> foundMembers = new List<Member>();
         List<Movie> foundMovies = new List<Movie>();
-        //List<MemberTypes> foundMemberType = new List<MemberTypes>();
-        //List<GenreMovie> foundGenresMovie = new List<GenreMovie>();
-        //List<MovieMember> foundMovieMember = new List<MovieMember>();
+        List<MemberTypes> foundMemberType = new List<MemberTypes>();
+        
 
         /// <summary>
         /// This method setsup a db connection to a postgreSQL db. The connection is stored in the global variable 'dbConnection'
@@ -118,6 +116,8 @@ namespace Project4
                 currentMember.Name = dataReader.GetString(1);
                 currentMember.DOB = dataReader.GetDateTime(2);
                 currentMember.Type = dataReader.GetInt32(3);
+
+                currentMember.MemberType = LoadMemberType(currentMember.Type);
 
                 foundMembers.Add(currentMember);
                 memberListBox.Items.Add(currentMember.Name);
@@ -212,8 +212,8 @@ namespace Project4
             return foundGenres;
         }
 
-        /* private List<MemberTypes> GetMemberTypeFromDB()
-         {
+        private List<MemberTypes> GetMemberTypeFromDB()
+        {
              MemberTypes currentMemberTypes;
 
              dbConnection.Open();
@@ -238,63 +238,8 @@ namespace Project4
 
              return foundMemberType;
 
-         }
+        }
 
-         private List<GenreMovie> GetGenreMovieFromDB()
-         {
-             GenreMovie currentGenreMovie;
-
-             dbConnection.Open();
-
-             string sqlQuery = "SELECT * FROM jt_genre_movie;";
-
-             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
-
-             NpgsqlDataReader dataReader = dbCommand.ExecuteReader();
-
-             while (dataReader.Read())
-             {
-                 currentGenreMovie = new GenreMovie();
-
-                 currentGenreMovie.Code = dataReader.GetString(0);
-                 currentGenreMovie.ID = dataReader.GetInt32(1);
-
-
-                 foundGenresMovie.Add(currentGenreMovie);
-             }
-             dbConnection.Close();
-
-             return foundGenresMovie;
-
-         }
-
-         private List<MovieMember> GetMovieMemberFromDB()
-         {
-             MovieMember currentMovieMember;
-
-             dbConnection.Open();
-
-             string sqlQuery = "SELECT * FROM jt_movie_member;";
-
-             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
-
-             NpgsqlDataReader dataReader = dbCommand.ExecuteReader();
-
-             while (dataReader.Read())
-             {
-                 currentMovieMember = new MovieMember();
-
-                 currentMovieMember.MovieID = dataReader.GetInt32(0);
-                 currentMovieMember.MemberID = dataReader.GetInt32(1);
-
-
-                 foundMovieMember.Add(currentMovieMember);
-             }
-             dbConnection.Close();
-
-             return foundMovieMember;
-
-         }*/
 
         private List<Genre> LoadMovieGenres(int movieID)
         {
@@ -424,6 +369,71 @@ namespace Project4
             return MemberList;
         }
 
+        private List<MemberTypes> LoadMemberType(int memberType)
+        {
+
+            //The following Connection, Command and DataReader objects will be used to access the jt_genre_movie table
+            NpgsqlConnection dbConnection6 = CreateDBConnection(DbServerHost, DbUsername, DbUuserPassword, DbName);
+            NpgsqlCommand dbCommand6;
+            NpgsqlDataReader dataReader6;
+
+            MemberTypes currentMemberType;
+
+            List<MemberTypes> MemberTypeList = new List<MemberTypes>();
+
+            dbConnection6.Open();
+
+            string sqlQuery = "SELECT * FROM member_type WHERE id = " + memberType + ";";
+
+            dbCommand6 = new NpgsqlCommand(sqlQuery, dbConnection6);
+
+            dataReader6 = dbCommand6.ExecuteReader();
+
+            //While there are genre_codes in the dataReader2
+            while (dataReader6.Read())
+            {
+                currentMemberType = new MemberTypes();
+
+                currentMemberType.ID = dataReader6.GetInt32(0);
+                currentMemberType.Name = dataReader6.GetString(1);
+                currentMemberType.Description = dataReader6.GetString(2);
+
+                
+                MemberTypeList.Add(currentMemberType);
+
+            }
+
+            dbConnection6.Close();
+
+            return MemberTypeList;
+        }
+
+        private int SearchMoviesByName(string movieName)
+        {
+            int I = 0;
+            foreach (Movie movies in foundMovies)
+            {
+                if (movieName != foundMovies[I].Title)
+                {
+                    I++;
+                }
+            }
+            return I;
+        }
+
+        private int SearchMembersByName(string memberName)
+        {
+            int I = 0;
+            foreach (Member member in foundMembers)
+            {
+                if (memberName != foundMembers[I].Name)
+                {
+                    I++;
+                }
+            }
+            return I;
+        }
+
         private void genreNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -466,6 +476,7 @@ namespace Project4
             moviesListView.Columns.Add("Title");
             moviesListView.Columns.Add("Year");
             moviesListView.Columns.Add("Length");
+            
 
             foreach (Member currentMember in foundMembers)
             {
@@ -475,18 +486,38 @@ namespace Project4
                     memberTypeComboBox.Text = currentMember.Type.ToString();
                     memberIDTextBox.Text = currentMember.ID.ToString();
                     memberDOBTextBox.Text = currentMember.DOB.ToString();
+
                 }
             }
 
             foreach (Movie currentMovie in foundMovies)
             {
-
                 foreach (Member currentMember in currentMovie.Members)
                 {
+                    foreach (Member currentMember2 in foundMembers)
+                    {
+                        foreach (MemberTypes currentMemberType in currentMember2.MemberType)
+                        {
+                            if (memberNameComboBox.GetItemText(memberNameComboBox.SelectedItem) == currentMember2.Name)
+                            {
+
+                                memberFieldTextBox.Text = currentMemberType.Name;
+                                memberDescriptionRichTextBox.Text = currentMemberType.Description;
+
+                            }
+                            
+
+                        }
+
+                    }
+                    
+                   
                     if (memberNameComboBox.GetItemText(memberNameComboBox.SelectedItem) == currentMember.Name)
                     {
                         moviesListView.Items.Add(new ListViewItem(new[] { currentMovie.Title, currentMovie.Year.ToString(), currentMovie.Length }));
+                       
                     }
+
                 }
             }
         }
@@ -519,31 +550,74 @@ namespace Project4
                 ratingTextBox.Text = foundMovies[SearchMoviesByName(Name)].Rating.ToString("N2");
                 imageTextBox.Text = foundMovies[SearchMoviesByName(Name)].Image;
 
-
-                  /*  ListBox.Items.Clear();
-
-                    foreach (Animal animal in OwnerList[memberListBox.SelectedIndex].PetList)
-                    {
-                        petListBox.Items.Add(animal.Name);
-                    }
-                */
+                movieMemberListBox.Items.Clear();
+                
+                foreach (Member member in foundMovies[SearchMoviesByName(Name)].Members)
+                {
+                    movieMemberListBox.Items.Add(member.Name);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        private int SearchMoviesByName(string movieName)
+        
+
+        private void movieMemberListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int I = 0;
-            foreach (Movie movies in foundMovies)
+            if (movieMemberListBox.SelectedIndices.Count <= 0)
             {
-                if (movieName != foundMovies[I].Title)
-                {
-                    I++;
-                }
+                return;
             }
-            return I;
+
+            int index = movieMemberListBox.SelectedIndices[0];
+            string Name = movieMemberListBox.Items[index].ToString();
+
+            memberNameComboBox.Text = foundMembers[SearchMembersByName(Name)].Name;
+            memberTypeComboBox.Text = foundMembers[SearchMembersByName(Name)].Type.ToString();
+            memberIDTextBox.Text = foundMembers[SearchMembersByName(Name)].ID.ToString();
+            memberDOBTextBox.Text = foundMembers[SearchMembersByName(Name)].DOB.ToString();
+            memberFieldTextBox.Text = foundMemberType[foundMembers[SearchMembersByName(Name)].Type - 1].Name.ToString();
+            memberDescriptionRichTextBox.Text = foundMemberType[foundMembers[SearchMembersByName(Name)].Type - 1].Description.ToString();
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            movieMemberListBox.Items.Clear();
+            moviesListView.Clear();
+            memberNameComboBox.Text = "";
+            memberTypeComboBox.Text = "";
+            memberIDTextBox.Text = "";
+            memberDOBTextBox.Text = "";
+            idTextBox.Text = "";
+            nameTextBox.Text = "";
+            yearTextBox.Text = "";
+            lengthTextBox.Text = "";
+            ratingTextBox.Text = "";
+            imageTextBox.Text = "";
+            genreComboBox.Items.Clear();
+            genreNameComboBox.Text = "";
+            genreCodeTextBox.Text = "";
+            genreDescriptionTextBox.Text = "";
+            moviesListView.View = View.Details;
+            moviesListView.FullRowSelect = true;
+            moviesListView.GridLines = true;
+            moviesListView.Columns.Add("Title");
+            moviesListView.Columns.Add("Year");
+            moviesListView.Columns.Add("Length");
+
+            foreach (Movie currentMovie in foundMovies)
+            {
+
+                moviesListView.Items.Add(new ListViewItem(new[] { currentMovie.Title, currentMovie.Year.ToString(), currentMovie.Length }));
+
+            }
         }
     }
 }

@@ -80,13 +80,17 @@
             this.label21 = new System.Windows.Forms.Label();
             this.addMemberToMovieButton = new System.Windows.Forms.Button();
             this.removeMemberButton = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.memberFieldTextBox = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.memberDescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.moviesPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // genreNameComboBox
             // 
             this.genreNameComboBox.FormattingEnabled = true;
-            this.genreNameComboBox.Location = new System.Drawing.Point(229, 69);
+            this.genreNameComboBox.Location = new System.Drawing.Point(222, 32);
             this.genreNameComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.genreNameComboBox.Name = "genreNameComboBox";
             this.genreNameComboBox.Size = new System.Drawing.Size(195, 24);
@@ -96,7 +100,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(83, 111);
+            this.label18.Location = new System.Drawing.Point(76, 74);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(80, 17);
@@ -106,7 +110,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(77, 78);
+            this.label17.Location = new System.Drawing.Point(70, 41);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(84, 17);
@@ -116,7 +120,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(39, 144);
+            this.label16.Location = new System.Drawing.Point(32, 107);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(118, 17);
@@ -125,7 +129,7 @@
             // 
             // genreCodeTextBox
             // 
-            this.genreCodeTextBox.Location = new System.Drawing.Point(229, 105);
+            this.genreCodeTextBox.Location = new System.Drawing.Point(222, 68);
             this.genreCodeTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.genreCodeTextBox.Name = "genreCodeTextBox";
             this.genreCodeTextBox.Size = new System.Drawing.Size(195, 22);
@@ -133,7 +137,7 @@
             // 
             // genreDescriptionTextBox
             // 
-            this.genreDescriptionTextBox.Location = new System.Drawing.Point(229, 139);
+            this.genreDescriptionTextBox.Location = new System.Drawing.Point(222, 102);
             this.genreDescriptionTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.genreDescriptionTextBox.Name = "genreDescriptionTextBox";
             this.genreDescriptionTextBox.Size = new System.Drawing.Size(195, 22);
@@ -141,7 +145,7 @@
             // 
             // deleteGenreButton
             // 
-            this.deleteGenreButton.Location = new System.Drawing.Point(330, 186);
+            this.deleteGenreButton.Location = new System.Drawing.Point(323, 149);
             this.deleteGenreButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteGenreButton.Name = "deleteGenreButton";
             this.deleteGenreButton.Size = new System.Drawing.Size(147, 31);
@@ -151,7 +155,7 @@
             // 
             // modifyGenreButton
             // 
-            this.modifyGenreButton.Location = new System.Drawing.Point(175, 186);
+            this.modifyGenreButton.Location = new System.Drawing.Point(168, 149);
             this.modifyGenreButton.Margin = new System.Windows.Forms.Padding(4);
             this.modifyGenreButton.Name = "modifyGenreButton";
             this.modifyGenreButton.Size = new System.Drawing.Size(147, 31);
@@ -161,7 +165,7 @@
             // 
             // addGenreButton
             // 
-            this.addGenreButton.Location = new System.Drawing.Point(20, 186);
+            this.addGenreButton.Location = new System.Drawing.Point(13, 149);
             this.addGenreButton.Margin = new System.Windows.Forms.Padding(4);
             this.addGenreButton.Name = "addGenreButton";
             this.addGenreButton.Size = new System.Drawing.Size(147, 31);
@@ -172,7 +176,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(225, 44);
+            this.label7.Location = new System.Drawing.Point(218, 7);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(72, 17);
@@ -182,7 +186,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1350, 29);
+            this.label19.Location = new System.Drawing.Point(1342, 7);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(52, 17);
@@ -192,7 +196,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(54, 708);
+            this.label15.Location = new System.Drawing.Point(47, 671);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(100, 17);
@@ -202,7 +206,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(71, 673);
+            this.label14.Location = new System.Drawing.Point(64, 636);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(83, 17);
@@ -211,7 +215,7 @@
             // 
             // memberDOBTextBox
             // 
-            this.memberDOBTextBox.Location = new System.Drawing.Point(231, 703);
+            this.memberDOBTextBox.Location = new System.Drawing.Point(224, 666);
             this.memberDOBTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.memberDOBTextBox.Name = "memberDOBTextBox";
             this.memberDOBTextBox.Size = new System.Drawing.Size(191, 22);
@@ -219,7 +223,7 @@
             // 
             // memberIDTextBox
             // 
-            this.memberIDTextBox.Location = new System.Drawing.Point(231, 668);
+            this.memberIDTextBox.Location = new System.Drawing.Point(224, 631);
             this.memberIDTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.memberIDTextBox.Name = "memberIDTextBox";
             this.memberIDTextBox.Size = new System.Drawing.Size(191, 22);
@@ -228,7 +232,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(225, 572);
+            this.label13.Location = new System.Drawing.Point(218, 535);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(86, 17);
@@ -238,7 +242,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(227, 238);
+            this.label12.Location = new System.Drawing.Point(220, 201);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(79, 17);
@@ -247,7 +251,7 @@
             // 
             // idTextBox
             // 
-            this.idTextBox.Location = new System.Drawing.Point(229, 299);
+            this.idTextBox.Location = new System.Drawing.Point(222, 262);
             this.idTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Size = new System.Drawing.Size(193, 22);
@@ -256,7 +260,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(93, 304);
+            this.label11.Location = new System.Drawing.Point(86, 267);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(69, 17);
@@ -265,7 +269,7 @@
             // 
             // deleteMemberButton
             // 
-            this.deleteMemberButton.Location = new System.Drawing.Point(330, 753);
+            this.deleteMemberButton.Location = new System.Drawing.Point(324, 808);
             this.deleteMemberButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteMemberButton.Name = "deleteMemberButton";
             this.deleteMemberButton.Size = new System.Drawing.Size(147, 31);
@@ -275,7 +279,7 @@
             // 
             // modifyMemberButton
             // 
-            this.modifyMemberButton.Location = new System.Drawing.Point(175, 753);
+            this.modifyMemberButton.Location = new System.Drawing.Point(169, 808);
             this.modifyMemberButton.Margin = new System.Windows.Forms.Padding(4);
             this.modifyMemberButton.Name = "modifyMemberButton";
             this.modifyMemberButton.Size = new System.Drawing.Size(147, 31);
@@ -285,7 +289,7 @@
             // 
             // addMemberButton
             // 
-            this.addMemberButton.Location = new System.Drawing.Point(19, 753);
+            this.addMemberButton.Location = new System.Drawing.Point(13, 808);
             this.addMemberButton.Margin = new System.Windows.Forms.Padding(4);
             this.addMemberButton.Name = "addMemberButton";
             this.addMemberButton.Size = new System.Drawing.Size(147, 31);
@@ -296,7 +300,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(49, 603);
+            this.label10.Location = new System.Drawing.Point(42, 566);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(105, 17);
@@ -306,7 +310,7 @@
             // moviesListView
             // 
             this.moviesListView.HideSelection = false;
-            this.moviesListView.Location = new System.Drawing.Point(519, 69);
+            this.moviesListView.Location = new System.Drawing.Point(512, 32);
             this.moviesListView.Margin = new System.Windows.Forms.Padding(4);
             this.moviesListView.Name = "moviesListView";
             this.moviesListView.Size = new System.Drawing.Size(319, 736);
@@ -316,7 +320,7 @@
             // 
             // imageTextBox
             // 
-            this.imageTextBox.Location = new System.Drawing.Point(229, 471);
+            this.imageTextBox.Location = new System.Drawing.Point(222, 434);
             this.imageTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.imageTextBox.Name = "imageTextBox";
             this.imageTextBox.Size = new System.Drawing.Size(193, 22);
@@ -325,7 +329,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(31, 476);
+            this.label6.Location = new System.Drawing.Point(24, 439);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(126, 17);
@@ -334,7 +338,7 @@
             // 
             // moviesPictureBox
             // 
-            this.moviesPictureBox.Location = new System.Drawing.Point(1206, 69);
+            this.moviesPictureBox.Location = new System.Drawing.Point(1199, 32);
             this.moviesPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.moviesPictureBox.Name = "moviesPictureBox";
             this.moviesPictureBox.Size = new System.Drawing.Size(373, 736);
@@ -344,7 +348,7 @@
             // 
             // ratingTextBox
             // 
-            this.ratingTextBox.Location = new System.Drawing.Point(229, 437);
+            this.ratingTextBox.Location = new System.Drawing.Point(222, 400);
             this.ratingTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ratingTextBox.Name = "ratingTextBox";
             this.ratingTextBox.Size = new System.Drawing.Size(193, 22);
@@ -352,7 +356,7 @@
             // 
             // lengthTextBox
             // 
-            this.lengthTextBox.Location = new System.Drawing.Point(229, 405);
+            this.lengthTextBox.Location = new System.Drawing.Point(222, 368);
             this.lengthTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.lengthTextBox.Name = "lengthTextBox";
             this.lengthTextBox.Size = new System.Drawing.Size(193, 22);
@@ -360,7 +364,7 @@
             // 
             // yearTextBox
             // 
-            this.yearTextBox.Location = new System.Drawing.Point(229, 370);
+            this.yearTextBox.Location = new System.Drawing.Point(222, 333);
             this.yearTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.yearTextBox.Name = "yearTextBox";
             this.yearTextBox.Size = new System.Drawing.Size(193, 22);
@@ -368,7 +372,7 @@
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(229, 336);
+            this.nameTextBox.Location = new System.Drawing.Point(222, 299);
             this.nameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(193, 22);
@@ -377,7 +381,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(651, 29);
+            this.label8.Location = new System.Drawing.Point(643, 7);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 17);
@@ -387,7 +391,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(69, 442);
+            this.label5.Location = new System.Drawing.Point(62, 405);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(92, 17);
@@ -397,7 +401,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(60, 640);
+            this.label4.Location = new System.Drawing.Point(53, 603);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 17);
@@ -407,7 +411,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(68, 408);
+            this.label3.Location = new System.Drawing.Point(61, 371);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 17);
@@ -417,7 +421,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(79, 377);
+            this.label2.Location = new System.Drawing.Point(72, 340);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 17);
@@ -427,7 +431,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(87, 342);
+            this.label1.Location = new System.Drawing.Point(80, 305);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 17);
@@ -436,17 +440,18 @@
             // 
             // ExitButton
             // 
-            this.ExitButton.Location = new System.Drawing.Point(112, 799);
+            this.ExitButton.Location = new System.Drawing.Point(106, 854);
             this.ExitButton.Margin = new System.Windows.Forms.Padding(4);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(147, 31);
             this.ExitButton.TabIndex = 145;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // deleteMovieButton
             // 
-            this.deleteMovieButton.Location = new System.Drawing.Point(330, 517);
+            this.deleteMovieButton.Location = new System.Drawing.Point(323, 480);
             this.deleteMovieButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteMovieButton.Name = "deleteMovieButton";
             this.deleteMovieButton.Size = new System.Drawing.Size(147, 31);
@@ -456,17 +461,18 @@
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(267, 799);
+            this.clearButton.Location = new System.Drawing.Point(261, 854);
             this.clearButton.Margin = new System.Windows.Forms.Padding(4);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(147, 31);
             this.clearButton.TabIndex = 143;
             this.clearButton.Text = "Clear ";
             this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // modifyMovieButton
             // 
-            this.modifyMovieButton.Location = new System.Drawing.Point(174, 517);
+            this.modifyMovieButton.Location = new System.Drawing.Point(167, 480);
             this.modifyMovieButton.Margin = new System.Windows.Forms.Padding(4);
             this.modifyMovieButton.Name = "modifyMovieButton";
             this.modifyMovieButton.Size = new System.Drawing.Size(147, 31);
@@ -476,7 +482,7 @@
             // 
             // addMovieButton
             // 
-            this.addMovieButton.Location = new System.Drawing.Point(19, 517);
+            this.addMovieButton.Location = new System.Drawing.Point(12, 480);
             this.addMovieButton.Margin = new System.Windows.Forms.Padding(4);
             this.addMovieButton.Name = "addMovieButton";
             this.addMovieButton.Size = new System.Drawing.Size(147, 31);
@@ -487,7 +493,7 @@
             // memberNameComboBox
             // 
             this.memberNameComboBox.FormattingEnabled = true;
-            this.memberNameComboBox.Location = new System.Drawing.Point(231, 594);
+            this.memberNameComboBox.Location = new System.Drawing.Point(224, 557);
             this.memberNameComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.memberNameComboBox.Name = "memberNameComboBox";
             this.memberNameComboBox.Size = new System.Drawing.Size(191, 24);
@@ -497,7 +503,7 @@
             // genreComboBox
             // 
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(229, 262);
+            this.genreComboBox.Location = new System.Drawing.Point(222, 225);
             this.genreComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(193, 24);
@@ -506,7 +512,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(77, 271);
+            this.label9.Location = new System.Drawing.Point(70, 234);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(86, 17);
@@ -521,7 +527,7 @@
             "2",
             "3",
             "4"});
-            this.memberTypeComboBox.Location = new System.Drawing.Point(231, 631);
+            this.memberTypeComboBox.Location = new System.Drawing.Point(224, 594);
             this.memberTypeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.memberTypeComboBox.Name = "memberTypeComboBox";
             this.memberTypeComboBox.Size = new System.Drawing.Size(193, 24);
@@ -531,7 +537,7 @@
             // 
             this.memberListBox.FormattingEnabled = true;
             this.memberListBox.ItemHeight = 16;
-            this.memberListBox.Location = new System.Drawing.Point(846, 454);
+            this.memberListBox.Location = new System.Drawing.Point(839, 417);
             this.memberListBox.Margin = new System.Windows.Forms.Padding(4);
             this.memberListBox.Name = "memberListBox";
             this.memberListBox.Size = new System.Drawing.Size(351, 292);
@@ -541,16 +547,17 @@
             // 
             this.movieMemberListBox.FormattingEnabled = true;
             this.movieMemberListBox.ItemHeight = 16;
-            this.movieMemberListBox.Location = new System.Drawing.Point(846, 69);
+            this.movieMemberListBox.Location = new System.Drawing.Point(839, 32);
             this.movieMemberListBox.Margin = new System.Windows.Forms.Padding(4);
             this.movieMemberListBox.Name = "movieMemberListBox";
             this.movieMemberListBox.Size = new System.Drawing.Size(351, 292);
             this.movieMemberListBox.TabIndex = 193;
+            this.movieMemberListBox.SelectedIndexChanged += new System.EventHandler(this.movieMemberListBox_SelectedIndexChanged);
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(931, 29);
+            this.label20.Location = new System.Drawing.Point(920, 7);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(122, 17);
@@ -560,7 +567,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(979, 429);
+            this.label21.Location = new System.Drawing.Point(972, 392);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(70, 17);
@@ -569,7 +576,7 @@
             // 
             // addMemberToMovieButton
             // 
-            this.addMemberToMovieButton.Location = new System.Drawing.Point(846, 762);
+            this.addMemberToMovieButton.Location = new System.Drawing.Point(839, 725);
             this.addMemberToMovieButton.Margin = new System.Windows.Forms.Padding(4);
             this.addMemberToMovieButton.Name = "addMemberToMovieButton";
             this.addMemberToMovieButton.Size = new System.Drawing.Size(352, 43);
@@ -579,7 +586,7 @@
             // 
             // removeMemberButton
             // 
-            this.removeMemberButton.Location = new System.Drawing.Point(846, 376);
+            this.removeMemberButton.Location = new System.Drawing.Point(839, 339);
             this.removeMemberButton.Margin = new System.Windows.Forms.Padding(4);
             this.removeMemberButton.Name = "removeMemberButton";
             this.removeMemberButton.Size = new System.Drawing.Size(352, 43);
@@ -587,11 +594,51 @@
             this.removeMemberButton.Text = "Remove member from movie";
             this.removeMemberButton.UseVisualStyleBackColor = true;
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(46, 701);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(96, 17);
+            this.label22.TabIndex = 200;
+            this.label22.Text = "members field";
+            // 
+            // memberFieldTextBox
+            // 
+            this.memberFieldTextBox.Location = new System.Drawing.Point(223, 696);
+            this.memberFieldTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.memberFieldTextBox.Name = "memberFieldTextBox";
+            this.memberFieldTextBox.Size = new System.Drawing.Size(191, 22);
+            this.memberFieldTextBox.TabIndex = 199;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(47, 731);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(139, 17);
+            this.label23.TabIndex = 202;
+            this.label23.Text = "members description";
+            // 
+            // memberDescriptionRichTextBox
+            // 
+            this.memberDescriptionRichTextBox.Location = new System.Drawing.Point(223, 731);
+            this.memberDescriptionRichTextBox.Name = "memberDescriptionRichTextBox";
+            this.memberDescriptionRichTextBox.Size = new System.Drawing.Size(195, 70);
+            this.memberDescriptionRichTextBox.TabIndex = 203;
+            this.memberDescriptionRichTextBox.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1612, 855);
+            this.ClientSize = new System.Drawing.Size(1612, 891);
+            this.Controls.Add(this.memberDescriptionRichTextBox);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.memberFieldTextBox);
             this.Controls.Add(this.removeMemberButton);
             this.Controls.Add(this.addMemberToMovieButton);
             this.Controls.Add(this.label21);
@@ -707,6 +754,10 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button addMemberToMovieButton;
         private System.Windows.Forms.Button removeMemberButton;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox memberFieldTextBox;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.RichTextBox memberDescriptionRichTextBox;
     }
 }
 
