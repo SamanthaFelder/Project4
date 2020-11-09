@@ -72,6 +72,9 @@ namespace Project4
             return dbConnection;
         }
 
+        /// <summary>
+        /// This method displays the version of the Postgres server to which the program connects to.
+        /// </summary>
         private void CheckPostgresVersion()
         {
             dbConnection.Open();
@@ -86,7 +89,7 @@ namespace Project4
         }
 
         /// <summary>
-        /// This methods the info of a particular empoyee and returns a new Employee object containing that info
+        /// This method gets all the member information from the database and stores it in a list.
         /// </summary>
         /// <param name="MembersId">The employee ID</param>
         /// <returns></returns>
@@ -94,8 +97,10 @@ namespace Project4
         {
             Member currentMember;
 
+            // Open the connection.
             dbConnection.Open();
 
+            // This is a string representing the SQL query to execute in the db.
             string sqlQuery = "SELECT * FROM Member;";
 
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
@@ -122,12 +127,17 @@ namespace Project4
             return foundMembers;
         }
 
+        /// <summary>
+        /// This method gets all the movie information from the database and stores it in a list.
+        /// </summary>
+        /// <returns></returns>
         private List<Movie> GetMoviesFromDB()
         {
             Movie currentMovie;
 
             dbConnection.Open();
 
+            // This is a string representing the SQL query to execute in the db.
             string sqlQuery = "SELECT * FROM Movie;";
 
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
@@ -163,12 +173,17 @@ namespace Project4
             return foundMovies;
         }
 
+        /// <summary>
+        /// This method gets all the genre information from the database and stores it in a list.
+        /// </summary>
+        /// <returns></returns>
         private List<Genre> GetGenresFromDB()
         {
             Genre currentGenre;
 
             dbConnection.Open();
 
+            // This is a string representing the SQL query to execute in the db.
             string sqlQuery = "SELECT * FROM Genre;";
 
             NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
@@ -197,13 +212,18 @@ namespace Project4
             return foundGenres;
         }
 
+        /// <summary>
+        /// This method gets all the member type information from the database and stores it in a list.
+        /// </summary>
+        /// <returns></returns>
         private List<MemberTypes> GetMemberTypeFromDB()
         {
              MemberTypes currentMemberTypes;
 
              dbConnection.Open();
 
-             string sqlQuery = "SELECT * FROM member_type;";
+            // This is a string representing the SQL query to execute in the db.
+            string sqlQuery = "SELECT * FROM member_type;";
 
              NpgsqlCommand dbCommand = new NpgsqlCommand(sqlQuery, dbConnection);
 
@@ -225,6 +245,11 @@ namespace Project4
         }
 
 
+        /// <summary>
+        /// This method gets all the movie's genre information from the database and stores it in a list.
+        /// </summary>
+        /// <param name="movieID"></param>
+        /// <returns></returns>
         private List<Genre> LoadMovieGenres(int movieID)
         {
             //The following Connection, Command and DataReader objects will be used to access the jt_genre_movie table
@@ -245,6 +270,7 @@ namespace Project4
 
             dbConnection2.Open();
 
+            // This is a string representing the SQL query to execute in the db.
             string sqlQuery = "SELECT genre_code FROM jt_genre_movie WHERE movie_id = " + movieID + ";";
 
             dbCommand2 = new NpgsqlCommand(sqlQuery, dbConnection2);
@@ -261,6 +287,7 @@ namespace Project4
                 //Open a connection to access the 'genre' table
                 dbConnection3.Open();
 
+                // This is a string representing the SQL query to execute in the db.
                 sqlQuery = "SELECT * FROM genre WHERE code = '" + currentGenreCode + "';";
 
                 dbCommand3 = new NpgsqlCommand(sqlQuery, dbConnection3);
@@ -289,6 +316,11 @@ namespace Project4
             return GenreList;
         }
 
+        /// <summary>
+        /// This method gets all the movie's member information from the database and stores it in a list.
+        /// </summary>
+        /// <param name="movieID"></param>
+        /// <returns></returns>
         private List<Member> LoadMovieMembers(int movieID)
         {
             //The following Connection, Command and DataReader objects will be used to access the jt_genre_movie table
@@ -309,6 +341,7 @@ namespace Project4
 
             dbConnection4.Open();
 
+            // This is a string representing the SQL query to execute in the db.
             string sqlQuery = "SELECT member_id FROM jt_movie_member WHERE movie_id = " + movieID + ";";
 
             dbCommand4 = new NpgsqlCommand(sqlQuery, dbConnection4);
@@ -325,6 +358,7 @@ namespace Project4
                 //Open a connection to access the 'genre' table
                 dbConnection5.Open();
 
+                // This is a string representing the SQL query to execute in the db.
                 sqlQuery = "SELECT * FROM member WHERE id = '" + currentMemberID + "';";
 
                 dbCommand5 = new NpgsqlCommand(sqlQuery, dbConnection5);
@@ -348,6 +382,11 @@ namespace Project4
             return MemberList;
         }
 
+        /// <summary>
+        /// This method gets all the movie's member type information from the database and stores it in a list.
+        /// </summary>
+        /// <param name="memberType"></param>
+        /// <returns></returns>
         private List<MemberTypes> LoadMemberType(int memberType)
         {
             //The following Connection, Command and DataReader objects will be used to access the jt_genre_movie table
@@ -361,6 +400,7 @@ namespace Project4
 
             dbConnection6.Open();
 
+            // This is a string representing the SQL query to execute in the db.
             string sqlQuery = "SELECT * FROM member_type WHERE id = " + memberType + ";";
 
             dbCommand6 = new NpgsqlCommand(sqlQuery, dbConnection6);
@@ -383,6 +423,11 @@ namespace Project4
             return MemberTypeList;
         } 
         
+        /// <summary>
+        /// This method adds a genre to the database.
+        /// </summary>
+        /// <param name="genre"></param>
+        /// <returns></returns>
         private int InsertGenreInDB(Genre genre)
         {
             try 
@@ -421,6 +466,11 @@ namespace Project4
             }
         }
         
+        /// <summary>
+        /// This method modifies the genre in the database.
+        /// </summary>
+        /// <param name="genre"></param>
+        /// <returns></returns>
         private int ModifyGenreInDB(Genre genre)
         {
             NpgsqlConnection dbConnection10 = CreateDBConnection(DbServerHost, DbUsername, DbUuserPassword, DbName);
@@ -445,6 +495,11 @@ namespace Project4
             return queryResult;
         }
        
+        /// <summary>
+        /// This method deletes the genre from the database.
+        /// </summary>
+        /// <param name="genre"></param>
+        /// <returns></returns>
         private int DeleteGenreInDB(Genre genre)
         {
             try
@@ -483,7 +538,11 @@ namespace Project4
             }
         }
         
-        
+        /// <summary>
+        /// This method adds a member to the database.
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         private int InsertMemberInDB(Member member)
         {
             try
@@ -524,6 +583,11 @@ namespace Project4
            
         }
         
+        /// <summary>
+        /// This method modifies the member in the database.
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         private int ModifyMemberInDB(Member member)
         {
             NpgsqlConnection dbConnection11 = CreateDBConnection(DbServerHost, DbUsername, DbUuserPassword, DbName);
@@ -548,6 +612,11 @@ namespace Project4
             return queryResult;
         }
 
+        /// <summary>
+        /// This method deletes the member from the database.
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         private int DeleteMemberInDB(Member member)
         {
             try
@@ -588,6 +657,11 @@ namespace Project4
 
         }
 
+        /// <summary>
+        /// This method adds a movie to the database.
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
         private int InsertMovieInDB(Movie movie)
         {
             try
@@ -628,6 +702,11 @@ namespace Project4
             }
         }
 
+        /// <summary>
+        /// This method modifies the movie in the database.
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
         private int ModifyMovieInDB(Movie movie)
         {
             try
@@ -666,6 +745,11 @@ namespace Project4
             }
         }
 
+        /// <summary>
+        /// This method deletes the movie from the database.
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <returns></returns>
         private int DeleteMovieInDB(Movie movie)
         {
             try
@@ -705,6 +789,11 @@ namespace Project4
             }
         }
 
+        /// <summary>
+        /// This method changes the Date Of Birth textbox depending on the text.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void memberDOBTextBox_Enter(object sender, EventArgs e)
         {
             if(memberDOBTextBox.Text== "YYYY-MM-DD")
@@ -714,6 +803,11 @@ namespace Project4
             }
         }
 
+        /// <summary>
+        /// This method changes the Date Of Birth textbox depending on the text.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void memberDOBTextBox_Leave(object sender, EventArgs e)
         {
             if (memberDOBTextBox.Text == "")
@@ -723,6 +817,11 @@ namespace Project4
             }
         }
 
+        /// <summary>
+        /// This method searches for a movie based on its name.
+        /// </summary>
+        /// <param name="movieName"></param>
+        /// <returns></returns>
         private int SearchMoviesByName(string movieName)
         {
             int I = 0;
@@ -736,6 +835,11 @@ namespace Project4
             return I;
         }
 
+        /// <summary>
+        /// This method searches for a member based on its name.
+        /// </summary>
+        /// <param name="memberName"></param>
+        /// <returns></returns>
         private int SearchMembersByName(string memberName)
         {
             int I = 0;
@@ -749,6 +853,9 @@ namespace Project4
             return I;
         }
         
+        /// <summary>
+        /// This method clears everything.
+        /// </summary>
         private void ClearMethod()
         {
             movieMemberListBox.Items.Clear();
@@ -782,6 +889,11 @@ namespace Project4
             }
         }
 
+        /// <summary>
+        /// This method displays the genre's information and it's movies based on the genre selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void genreNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             moviesListView.Clear();
@@ -813,6 +925,11 @@ namespace Project4
             }
         }
 
+        /// <summary>
+        /// This method displays the member's information, member type and the movies the member participated in, based on the member selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void memberNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             moviesListView.Clear();
@@ -857,6 +974,11 @@ namespace Project4
             }
         }
 
+        /// <summary>
+        /// This method displays the movie's information and it's participating members, based on the movie selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void moviesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -905,6 +1027,11 @@ namespace Project4
             }
         }
         
+        /// <summary>
+        /// This method displays the member's information based on the member selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void movieMemberListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (movieMemberListBox.SelectedIndices.Count <= 0)
@@ -923,6 +1050,12 @@ namespace Project4
             memberDescriptionRichTextBox.Text = foundMemberType[foundMembers[SearchMembersByName(Name)].Type - 1].Description.ToString();
         }
 
+        /// <summary>
+        /// This method allows the User to add a genre.
+        /// It adds it to the database and the ComboBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addGenreButton_Click(object sender, EventArgs e)
         {
             Genre NewGenre = new Genre();
@@ -938,6 +1071,11 @@ namespace Project4
             ClearMethod();
         }
         
+        /// <summary>
+        /// This method allows the User to modify 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void modifyGenreButton_Click(object sender, EventArgs e)
         {
             Genre modifyGenre = new Genre();
@@ -1106,10 +1244,27 @@ namespace Project4
 
         private void removeMemberButton_Click(object sender, EventArgs e)
         {
+            Member DeleteMember = new Member();
 
+            DeleteMember.ID = int.Parse(memberIDTextBox.Text);
+            DeleteMember.Name = memberNameComboBox.Text;
+            DeleteMember.Type = int.Parse(memberTypeComboBox.Text);
+            DeleteMember.DOB = DateTime.Parse(memberDOBTextBox.Text);
+           
+
+            foundMembers.Clear();
+            DeleteMemberInDB(DeleteMember);
+            memberListBox.Items.Clear();
+            GetMembersFromDB();
+            ClearMethod();
         }
 
         private void addMemberToMovieButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void memberListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
