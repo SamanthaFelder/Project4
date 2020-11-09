@@ -619,31 +619,41 @@ namespace Project4
         /// <returns></returns>
         private int DeleteMemberInDB(Member member)
         {
-            try
-            {
+            
                 NpgsqlConnection dbConnection14 = CreateDBConnection(DbServerHost, DbUsername, DbUuserPassword, DbName);
                 NpgsqlCommand dbCommand14;
+            
 
                 //This variable will store the number of affecter rows by the INSERT query
                 int queryResult;
 
                 //Before sending commands to the database, the connection must be opened
                 dbConnection14.Open();
+               
 
                 //This is a string representing the SQL query to execute in the db
                 string sqlQuery = "DELETE FROM member WHERE id = '" + member.ID + "';";
 
+                string sqlQuery2 = "DELETE FROM jt_movie_member WHERE member_id = '" + member.ID + "';";
+
                 //This is the actual SQL containing the query to be executed
-                dbCommand14 = new NpgsqlCommand(sqlQuery, dbConnection14);
+                dbCommand14 = new NpgsqlCommand(sqlQuery2, dbConnection14);
+
+                var reader = dbCommand14.ExecuteReader();
+
+                dbCommand14.CommandText = (sqlQuery);
+              
 
                 queryResult = dbCommand14.ExecuteNonQuery();
+                
 
                 //After executing the query(ies) in the db, the connection must be closed
                 dbConnection14.Close();
+                
 
                 return queryResult;
 
-            }
+            /*}
             catch
             {
                 MessageBox.Show("please delete a different member");
@@ -653,7 +663,7 @@ namespace Project4
                 dbConnection14.Close();
 
                 return 0;
-            }
+            }*/
 
         }
 
@@ -1072,7 +1082,8 @@ namespace Project4
         }
         
         /// <summary>
-        /// This method allows the User to modify 
+        /// This method allows the User to modify a genre.
+        /// It modifies the genre from the database and then recalls the genres from the database.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1092,6 +1103,12 @@ namespace Project4
 
         }
 
+        /// <summary>
+        /// This method allows the User to delete a genre.
+        /// It deletes the genre from the database and then recalls the genres from there.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteGenreButton_Click(object sender, EventArgs e)
         {
             Genre DeleteGenre = new Genre();
@@ -1107,6 +1124,12 @@ namespace Project4
             ClearMethod();
         }
         
+        /// <summary>
+        /// This method allows the User to add a member.
+        /// It inserts the member into the database and then recalls the members from there.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addMemberButton_Click(object sender, EventArgs e)
         {
             Member NewMember = new Member();
@@ -1124,6 +1147,12 @@ namespace Project4
             ClearMethod();
         } 
         
+        /// <summary>
+        /// This method allows the User to modify a member.
+        /// It modifies the member in the database and then recalls the members.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void modifyMemberButton_Click(object sender, EventArgs e)
         {
             Member ModifyMember = new Member();
@@ -1142,6 +1171,12 @@ namespace Project4
 
         }
         
+        /// <summary>
+        /// This method allows the User to delete a member.
+        /// It deletes the member from the database then recalls the members from there.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteMemberButton_Click(object sender, EventArgs e)
         {
             Member DeleteMember = new Member();
@@ -1159,6 +1194,11 @@ namespace Project4
             ClearMethod();
         }
 
+        /// <summary>
+        /// This method allows the User to add a movie to the database.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addMovieButton_Click(object sender, EventArgs e)
         {
             Movie NewMovie = new Movie();
@@ -1183,6 +1223,11 @@ namespace Project4
             ClearMethod();
         }
 
+        /// <summary>
+        /// This method allows the User to modify a movie from the database.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void modifyMovieButton_Click(object sender, EventArgs e)
         {
             Movie ModifyMovie = new Movie();
@@ -1208,6 +1253,11 @@ namespace Project4
 
         }
 
+        /// <summary>
+        /// This method allows a User to delete a movie from the database.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteMovieButton_Click(object sender, EventArgs e)
         {
             Movie DeleteMovie = new Movie();
@@ -1232,16 +1282,27 @@ namespace Project4
             ClearMethod();
         }
 
+        /// <summary>
+        /// This method exits the program.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
        private void ExitButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // This method uses the clear method to clear everything out.
         private void clearButton_Click(object sender, EventArgs e)
         {
             ClearMethod();
         }
 
+        /// <summary>
+        /// This method allows the User to delete a member from a movie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void removeMemberButton_Click(object sender, EventArgs e)
         {
             Member DeleteMember = new Member();
@@ -1259,6 +1320,11 @@ namespace Project4
             ClearMethod();
         }
 
+        /// <summary>
+        /// This member allows the User to add a member to a movie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addMemberToMovieButton_Click(object sender, EventArgs e)
         {
 
