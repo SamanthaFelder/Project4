@@ -100,6 +100,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -114,6 +115,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flight.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\greenBook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lincoln.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\murderMystery.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\piratesDMC.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rundown.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shrek2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skyfall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toyStory4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vacation.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
