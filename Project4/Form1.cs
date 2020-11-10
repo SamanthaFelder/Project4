@@ -514,7 +514,7 @@ namespace Project4
                 dbConnection13.Open();
 
                 //This is a string representing the SQL query to execute in the db
-                string sqlQuery = "DELETE FROM genre WHERE code = '" + genre.Code + "';";
+                string sqlQuery = "DELETE FROM jt_genre_movie WHERE genre_code = '" + genre.Code + "';" + "DELETE FROM genre WHERE code = '" + genre.Code + "';";
 
                 //This is the actual SQL containing the query to be executed
                 dbCommand13 = new NpgsqlCommand(sqlQuery, dbConnection13);
@@ -632,17 +632,10 @@ namespace Project4
                
 
                 //This is a string representing the SQL query to execute in the db
-                string sqlQuery = "DELETE FROM member WHERE id = '" + member.ID + "';";
-
-                string sqlQuery2 = "DELETE FROM jt_movie_member WHERE member_id = '" + member.ID + "';";
+                string sqlQuery = "DELETE FROM jt_movie_member WHERE member_id = '" + member.ID + "';" + "DELETE FROM member WHERE id = '" + member.ID + "';";
 
                 //This is the actual SQL containing the query to be executed
-                dbCommand14 = new NpgsqlCommand(sqlQuery2, dbConnection14);
-
-                var reader = dbCommand14.ExecuteReader();
-
-                dbCommand14.CommandText = (sqlQuery);
-              
+                dbCommand14 = new NpgsqlCommand(sqlQuery, dbConnection14);
 
                 queryResult = dbCommand14.ExecuteNonQuery();
                 
@@ -774,7 +767,7 @@ namespace Project4
                 dbConnection15.Open();
 
                 //This is a string representing the SQL query to execute in the db
-                string sqlQuery = "DELETE FROM movie WHERE id = '" + movie.ID + "';";
+                string sqlQuery = "DELETE FROM jt_genre_movie WHERE movie_id = '" + movie.ID + "';" +"DELETE FROM jt_genre_movie WHERE movie_id = '" + movie.ID + "';" + "DELETE FROM movie WHERE id = '" + movie.ID + "';";
               
                 //This is the actual SQL containing the query to be executed
                 dbCommand15 = new NpgsqlCommand(sqlQuery, dbConnection15);
@@ -885,6 +878,7 @@ namespace Project4
             genreNameComboBox.Text = "";
             genreCodeTextBox.Text = "";
             genreDescriptionTextBox.Text = "";
+            moviesPictureBox.ImageLocation = "";
             moviesListView.View = View.Details;
             moviesListView.FullRowSelect = true;
             moviesListView.GridLines = true;
@@ -1186,8 +1180,8 @@ namespace Project4
             DeleteMember.DOB = DateTime.Parse(memberDOBTextBox.Text);
             DeleteMember.Type = int.Parse(memberTypeComboBox.Text);
             
-            foundMembers.Clear();
             DeleteMemberInDB(DeleteMember);
+            foundMembers.Clear();
             memberListBox.Items.Clear();
             memberNameComboBox.Items.Clear();
             GetMembersFromDB();
