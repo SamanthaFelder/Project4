@@ -191,6 +191,7 @@ namespace Project4
                 }
                 foundGenres.Add(currentGenre);
                 genreNameComboBox.Items.Add(currentGenre.Name);
+                genreComboBox.Items.Add(currentGenre.Code);
             }
             dbConnection.Close();
 
@@ -521,7 +522,6 @@ namespace Project4
 
                 return 0;
             }
-           
         }
         
         private int ModifyMemberInDB(Member member)
@@ -595,6 +595,9 @@ namespace Project4
                 NpgsqlConnection dbConnection9 = CreateDBConnection(DbServerHost, DbUsername, DbUuserPassword, DbName);
                 NpgsqlCommand dbCommand9;
 
+                NpgsqlConnection dbConnection16 = CreateDBConnection(DbServerHost, DbUsername, DbUuserPassword, DbName);
+                NpgsqlCommand dbCommand16;
+
                 //This variable will store the number of affecter rows by the INSERT query
                 int queryResult;
             
@@ -603,15 +606,23 @@ namespace Project4
 
                 //This is a string representing the SQL query to execute in the db
                 string sqlQuery = "INSERT INTO movie VALUES('" + movie.ID + "', '" + movie.Title + "', '"
-                    + movie.Year + "', '" + movie.Length + "', '" + movie.Rating + "', '" + movie.Image + "');";
-
+                        + movie.Year + "', '" + movie.Length + "', '" + movie.Rating + "', '" + movie.Image + "');";
+                
                 //This is the actual SQL containing the query to be executed
                 dbCommand9 = new NpgsqlCommand(sqlQuery, dbConnection9);
 
-                queryResult = dbCommand9.ExecuteNonQuery();
+                dbCommand9.ExecuteNonQuery();
 
+                dbConnection16.Open();
+
+                sqlQuery = "INSERT INTO jt_genre_movie VALUES('" + genreComboBox.Text + "', '" + movie.ID + "');";
+
+                dbCommand16 = new NpgsqlCommand(sqlQuery, dbConnection16);
+
+                queryResult = dbCommand16.ExecuteNonQuery();
                 //After executing the query(ies) in the db, the connection must be closed
                 dbConnection9.Close();
+                dbConnection16.Close();
 
                 return queryResult;
 
@@ -668,8 +679,8 @@ namespace Project4
 
         private int DeleteMovieInDB(Movie movie)
         {
-            try
-            {
+           // try
+            //{
                 NpgsqlConnection dbConnection15 = CreateDBConnection(DbServerHost, DbUsername, DbUuserPassword, DbName);
                 NpgsqlCommand dbCommand15;
 
@@ -681,18 +692,24 @@ namespace Project4
 
                 //This is a string representing the SQL query to execute in the db
                 string sqlQuery = "DELETE FROM movie WHERE id = '" + movie.ID + "';";
-              
+                string sqlQuery2 = "DELETE FROM jt_genre_movie WHERE movie_id = '" + movie.ID + "';";
+                string sqlQuery3 = "DELETE FROM jt_movie_member WHERE movie_id = '" + movie.ID + "';";
                 //This is the actual SQL containing the query to be executed
                 dbCommand15 = new NpgsqlCommand(sqlQuery, dbConnection15);
+                dbCommand15.ExecuteNonQuery();
 
-                queryResult = dbCommand15.ExecuteNonQuery();
+                dbCommand15 = new NpgsqlCommand(sqlQuery2, dbConnection15);
+                dbCommand15.ExecuteNonQuery();
+
+                dbCommand15 = new NpgsqlCommand(sqlQuery3, dbConnection15);
+                dbCommand15.ExecuteNonQuery();dbCommand15.ExecuteNonQuery();
 
                 //After executing the query(ies) in the db, the connection must be closed
                 dbConnection15.Close();
 
                 return queryResult;
 
-            }
+           /* }
             catch
             {
                 MessageBox.Show("please delete a different movie");
@@ -702,7 +719,7 @@ namespace Project4
                 dbConnection15.Close();
 
                 return 0;
-            }
+            }*/
         }
 
         private void memberDOBTextBox_Enter(object sender, EventArgs e)
@@ -779,6 +796,11 @@ namespace Project4
             {
                 moviesListView.Items.Add(new ListViewItem(new[] { currentMovie.Title, currentMovie.Year.ToString(), currentMovie.Length }));
 
+            }
+
+            foreach (Genre currentGenre in foundGenres)
+            {
+                genreComboBox.Items.Add(currentGenre.Code);
             }
         }
 
@@ -857,7 +879,7 @@ namespace Project4
             }
         }
 
-        private void moviesListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void updateMovieMemberListBox()
         {
             try
             {
@@ -874,7 +896,7 @@ namespace Project4
 
                 foreach (Genre genre in foundMovies[SearchMoviesByName(Name)].Genres)
                 {
-                    genreComboBox.Items.Add(genre.Name);
+                    genreComboBox.Items.Add(genre.Code);
                 }
 
                 idTextBox.Text = foundMovies[SearchMoviesByName(Name)].ID.ToString();
@@ -893,7 +915,7 @@ namespace Project4
                 }
 
                 movieMemberListBox.Items.Clear();
-                
+
                 foreach (Member member in foundMovies[SearchMoviesByName(Name)].Members)
                 {
                     movieMemberListBox.Items.Add(member.Name);
@@ -903,6 +925,11 @@ namespace Project4
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void moviesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updateMovieMemberListBox();
         }
         
         private void movieMemberListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -962,7 +989,6 @@ namespace Project4
             DeleteGenre.Name = genreNameComboBox.Text;
             DeleteGenre.Description = genreDescriptionTextBox.Text;
             
-           
             DeleteGenreInDB(DeleteGenre);
             genreNameComboBox.Items.Clear();
             GetGenresFromDB();
@@ -1025,6 +1051,7 @@ namespace Project4
         {
             Movie NewMovie = new Movie();
 
+            
             NewMovie.ID = int.Parse(idTextBox.Text);
             NewMovie.Title = nameTextBox.Text;
             NewMovie.Year = int.Parse(yearTextBox.Text);
@@ -1116,7 +1143,7 @@ namespace Project4
 
         /* 
          WHATS LEFT
-        1)to add member to move and to remove them 
+        1)to add member to movie and to remove them 
         2)delete joining table rows button
         3)to add movie to genre
         4)comments

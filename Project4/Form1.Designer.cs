@@ -525,12 +525,12 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(70, 234);
+            this.label9.Location = new System.Drawing.Point(29, 232);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(86, 17);
+            this.label9.Size = new System.Drawing.Size(121, 17);
             this.label9.TabIndex = 189;
-            this.label9.Text = "Movie genre";
+            this.label9.Text = "Movie genre code";
             // 
             // memberTypeComboBox
             // 
